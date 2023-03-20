@@ -41,10 +41,20 @@ class NetworkModule {
 
         addInterceptor(
             Interceptor {
-                val request = it.request()
-                val url = request.url.newBuilder().addQueryParameter("apikey", PUBLIC_KEY).build()
                 it.proceed(
-                    request.newBuilder().url(url).build()
+                    it.request()
+                        .newBuilder()
+                        .url(
+                            it.request()
+                                .url
+                                .newBuilder()
+                                .addQueryParameter(
+                                    "apikey",
+                                    PUBLIC_KEY
+                                )
+                                .build()
+                        )
+                        .build()
                 )
             }
         )
