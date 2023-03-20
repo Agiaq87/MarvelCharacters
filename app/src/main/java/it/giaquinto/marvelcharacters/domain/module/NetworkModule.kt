@@ -8,13 +8,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import it.giaquinto.marvelcharacters.BuildConfig
 import it.giaquinto.marvelcharacters.data.service.*
-import it.giaquinto.marvelcharacters.data.utils.toMD5
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.MessageDigest
-import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -41,7 +39,15 @@ class NetworkModule {
             )
         }
 
-        // TODO API-KEY INTERCEPTOR ???
+        addInterceptor(
+            Interceptor {
+                val request = it.request()
+                val url = request.url.newBuilder().addQueryParameter("apikey", PUBLIC_KEY).build()
+                it.proceed(
+                    request.newBuilder().url(url).build()
+                )
+            }
+        )
 
         build()
     }
@@ -91,18 +97,9 @@ class NetworkModule {
 
 
     companion object {
-        private const val PRIVATE_KEY = "d6008378f8ccbe2db6200a1fdb9ee921d1f99ce7"
         private const val TIMEOUT = 20L
+        private const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
+        private const val PUBLIC_KEY = "323934a0c171cb0a0140ede93dd4e52d"
 
-        private const val limit = "20"
-        private val md by lazy { MessageDigest.getInstance("MD5") }
-        private val baseHash: String
-            get() = "$timeStamp$PRIVATE_KEY$PUBLIC_KEY"
-
-        const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
-        const val PUBLIC_KEY = "323934a0c171cb0a0140ede93dd4e52d"
-        val timeStamp by lazy { Timestamp(System.currentTimeMillis()).time }
-
-        fun apiHash(): String = baseHash.toMD5(md)
     }
 }
