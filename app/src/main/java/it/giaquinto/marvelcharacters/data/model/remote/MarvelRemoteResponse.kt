@@ -1,9 +1,9 @@
 package it.giaquinto.marvelcharacters.data.model.remote
 
 import com.google.gson.annotations.SerializedName
-import it.giaquinto.marvelcharacters.data.model.MarvelRemoteResult
+import it.giaquinto.marvelcharacters.data.model.result.MarvelResult
 
-data class MarvelRemoteResponse<T : MarvelRemoteResult>(
+data class MarvelRemoteResponse<T : MarvelResult>(
     @SerializedName("code")
     val code: Int,
     @SerializedName("status")

@@ -3,7 +3,7 @@ package it.giaquinto.marvelcharacters.data.service
 import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.config.DevelopersMarvelRetrofitConfiguration
 import it.giaquinto.marvelcharacters.data.model.remote.MarvelRemoteResponse
-import it.giaquinto.marvelcharacters.data.model.result.EventResult
+import it.giaquinto.marvelcharacters.data.model.result.implementation.remote.EventResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

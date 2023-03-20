@@ -2,7 +2,7 @@ package it.giaquinto.marvelcharacters.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import it.giaquinto.marvelcharacters.data.model.result.*
+import it.giaquinto.marvelcharacters.data.model.result.implementation.local.*
 
 @Database(
     entities = [

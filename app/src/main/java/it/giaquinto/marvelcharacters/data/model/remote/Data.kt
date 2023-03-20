@@ -1,9 +1,9 @@
 package it.giaquinto.marvelcharacters.data.model.remote
 
 import com.google.gson.annotations.SerializedName
-import it.giaquinto.marvelcharacters.data.model.MarvelRemoteResult
+import it.giaquinto.marvelcharacters.data.model.result.MarvelResult
 
-data class Data<T : MarvelRemoteResult>(
+data class Data<T : MarvelResult>(
     @SerializedName("offset")
     val offset: Int,
     @SerializedName("limit")
