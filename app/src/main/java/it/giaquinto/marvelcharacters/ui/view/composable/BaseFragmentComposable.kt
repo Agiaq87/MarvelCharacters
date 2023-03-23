@@ -76,7 +76,9 @@ fun MarvelCard(
     Card(
         shape = CardRoundedCorner,
         elevation = MinimumElevation,
-        contentColor = BackgroundDefaultRedItem
+        contentColor = BackgroundDefaultRedItem,
+        modifier = Modifier
+            .padding(LowPadding)
     ) {
         Column {
             AsyncImage(
@@ -117,18 +119,11 @@ fun MarvelCard(
 fun DefaultPreview() {
     MarvelCharactersTheme {
         DefaultBackground {
-            Row {
-                MarvelCard(
-                    "https://cdn.marvel.com/u/prod/marvel/images/mu/web/2021/icon-mu-shield.png",
-                    "LOGO",
-                    "Lorem ipsum dolor sit amet, consectet… adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ipsdum"
-                )
-                MarvelCard(
-                    "https://cdn.marvel.com/u/prod/marvel/images/mu/web/2021/icon-mu-shield.png",
-                    "LOGO",
-                    "Lorem ipsum dolor sit amet, consectet… adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ipsdum"
-                )
-            }
+            MarvelCard(
+                "https://cdn.marvel.com/u/prod/marvel/images/mu/web/2021/icon-mu-shield.png",
+                "LOGO",
+                "Lorem ipsum dolor sit amet, consectet… adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ipsdum"
+            )
         }
     }
 }
