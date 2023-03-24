@@ -11,7 +11,7 @@ data class CharacterEntity(
     override val name: String,
     override val description: String,
     val modified: String,
-    val resourceURI: String
+    override val resourceURI: String
 ) : MarvelCharacter {
     fun asEntity(): CharacterEntity =
         CharacterEntity(

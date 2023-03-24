@@ -28,4 +28,7 @@ class CharacterResult(
     modified,
     resourceURI,
     thumbnail
-), MarvelCharacter
+), MarvelCharacter {
+    override val resourceURI: String
+        get() = thumbnail.path
+}

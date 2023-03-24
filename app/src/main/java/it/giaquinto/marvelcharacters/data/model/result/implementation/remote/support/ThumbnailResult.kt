@@ -2,10 +2,14 @@ package it.giaquinto.marvelcharacters.data.model.result.implementation.remote.su
 
 
 import com.google.gson.annotations.SerializedName
+import it.giaquinto.marvelcharacters.data.model.result.MarvelThumbnail
 
 data class ThumbnailResult(
     @SerializedName("extension")
-    val extension: String,
+    override val extension: String,
     @SerializedName("path")
-    val path: String
-)
+    override val path: String
+) : MarvelThumbnail {
+    override fun toResourceUri(): String =
+        path
+}
