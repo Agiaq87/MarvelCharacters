@@ -10,5 +10,5 @@ val FooterHeight = 86.dp
 val IconSize = 24.dp
 val ImageSize = 90.dp
 
-val DefaultProgressSize = 120.dp
+val DefaultProgressSize = 20.dp
 val DefaultProgressStrokeWidth = 5.dp
