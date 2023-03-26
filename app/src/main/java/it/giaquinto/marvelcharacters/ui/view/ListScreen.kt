@@ -228,7 +228,7 @@ fun <T : MarvelResult> GridList(
                     MarvelCardCharacter(character = data[it] as MarvelCharacter)
                 }
             }
-            is MarvelComic -> {
+            is MarvelEvent -> {
 
             }
         }
@@ -242,9 +242,9 @@ fun <T : MarvelResult> SimpleList(
 ) {
     LazyColumn {
         when (clazz) {
-            is MarvelEvent -> {
+            is MarvelComic -> {
                 items(data.size) {
-
+                    MarvelCardComic(comic = data[it] as MarvelComic)
                 }
             }
         }

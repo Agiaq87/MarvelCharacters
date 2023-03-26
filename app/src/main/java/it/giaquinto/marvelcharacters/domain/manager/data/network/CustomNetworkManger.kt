@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class CustomNetworkManger @Inject constructor(
+class CustomNetworkManger @Inject constructor(
     @ApplicationContext context: Context
 ) : NetworkManager, ConnectivityManager.NetworkCallback() {
 

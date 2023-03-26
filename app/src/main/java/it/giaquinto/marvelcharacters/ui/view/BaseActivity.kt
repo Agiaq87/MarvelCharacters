@@ -7,16 +7,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import it.giaquinto.marvelcharacters.domain.manager.data.tracker.ScreenDataTrack
 import it.giaquinto.marvelcharacters.ui.theme.MarvelCharactersTheme
 import it.giaquinto.marvelcharacters.ui.view.composable.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class BaseActivity : ComponentActivity() {
 
     @Inject
-    private lateinit var trackerManager: TrackerManager
+    lateinit var trackerManager: TrackerManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
