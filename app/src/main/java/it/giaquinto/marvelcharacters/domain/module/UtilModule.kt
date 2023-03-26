@@ -7,7 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import it.giaquinto.marvelcharacters.domain.manager.NetworkManager
-import it.giaquinto.marvelcharacters.domain.manager.data.CustomNetworkManger
+import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
+import it.giaquinto.marvelcharacters.domain.manager.data.network.CustomNetworkManger
+import it.giaquinto.marvelcharacters.domain.manager.data.tracker.CustomTrackerManager
 import javax.inject.Singleton
 
 @Module
@@ -17,4 +19,9 @@ class UtilModule {
     @Provides
     fun provideCustomNetworkManager(@ApplicationContext context: Context): NetworkManager =
         CustomNetworkManger(context)
+
+    @Singleton
+    @Provides
+    fun provideCustomTrackerManager(): TrackerManager =
+        CustomTrackerManager()
 }

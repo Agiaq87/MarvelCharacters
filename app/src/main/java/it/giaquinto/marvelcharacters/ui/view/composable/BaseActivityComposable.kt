@@ -61,9 +61,9 @@ fun Title() {
                 .fillMaxWidth()
                 .padding(
                     NoPadding,
-                    MediumPadding,
+                    SixTeenPadding,
                     NoPadding,
-                    MediumPadding
+                    SixTeenPadding
                 ),
             style = MaterialTheme.typography.h1,
             color = OnPrimaryDefaultColor
@@ -88,7 +88,7 @@ fun AppFooter(
         backgroundColor = BackgroundDefaultRed,
         elevation = DefaultElevation,
         contentPadding = PaddingValues(
-            ExtremePadding,
+            SixtyPadding,
             NoPadding
         )
     ) {
@@ -115,9 +115,9 @@ fun DefaultBackground(
     ) {
         Column(
             modifier = Modifier.padding(
-                LargePadding,
-                LargePadding,
-                LargePadding,
+                ThirtyPadding,
+                ThirtyPadding,
+                ThirtyPadding,
                 NoPadding
             ),
             content = passedContent

@@ -1,4 +1,4 @@
-package it.giaquinto.marvelcharacters.domain.manager.data
+package it.giaquinto.marvelcharacters.domain.manager.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CustomNetworkManger @Inject constructor(
+internal class CustomNetworkManger @Inject constructor(
     @ApplicationContext context: Context
 ) : NetworkManager, ConnectivityManager.NetworkCallback() {
 

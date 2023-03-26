@@ -46,7 +46,7 @@ fun Pulse(
         modifier = Modifier
             .scale(scale)
             .background(color)
-            .padding(LowPadding)
+            .padding(EightPadding)
     ) {
         passedContent()
     }
@@ -65,7 +65,7 @@ fun LoadingScreen() {
                 Box(
                     modifier = Modifier
                         .padding(
-                            LowPadding,
+                            EightPadding,
                             NoPadding
                         )
                         .wrapContentSize()

@@ -1,4 +1,4 @@
-package it.giaquinto.marvelcharacters.domain.manager.data
+package it.giaquinto.marvelcharacters.domain.manager.data.network
 
 enum class ConnectivityState {
     OK,         // Wifi or mobile connection active
