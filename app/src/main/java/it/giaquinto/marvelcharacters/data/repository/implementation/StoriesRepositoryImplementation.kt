@@ -2,6 +2,7 @@ package it.giaquinto.marvelcharacters.data.repository.implementation
 
 import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.db.StoryDao
+import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
 import it.giaquinto.marvelcharacters.data.model.result.MarvelStory
 import it.giaquinto.marvelcharacters.data.repository.StoryRepository
 import it.giaquinto.marvelcharacters.data.service.StoriesApiService
@@ -14,31 +15,32 @@ class StoriesRepositoryImplementation @Inject constructor(
     private val storiesApiService: StoriesApiService,
     private val storyDao: StoryDao
 ) : StoryRepository {
-    override fun all(): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun all(): Flow<ApiResult<out List<MarvelCharacter>>> {
         TODO("Not yet implemented")
     }
 
-    override fun byCharacterID(characterID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun byCharacterID(characterID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
 
-    override fun byComicID(comicID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun byComicID(comicID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
 
-    override fun byCreatorID(creatorID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun byCreatorID(creatorID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
 
-    override fun byEventID(eventID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun byEventID(eventID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
 
-    override fun bySeriesID(seriesID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun bySeriesID(seriesID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
 
-    override fun byStoryID(storyID: String): Flow<ApiResult<List<MarvelStory>>> {
+    override suspend fun byStoryID(storyID: String): Flow<ApiResult<out List<MarvelStory>>> {
         TODO("Not yet implemented")
     }
+
 }

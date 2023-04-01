@@ -21,6 +21,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        def publicKey = project.property("public_key")
+        def privateKey = project.property("private_key")
+        buildConfigField("String", "PUBLIC_KEY", publicKey)
+        buildConfigField("String", "PRIVATE_KEY", privateKey)
     }
 
     buildTypes {
@@ -97,8 +102,9 @@ dependencies {
     // Retrofit
 
     // DB
-    implementation "androidx.room:room-runtime:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
+    implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'androidx.room:room-ktx:2.5.1'
+    kapt 'androidx.room:room-compiler:2.5.1'
     // DB
 
     // FIREBASE

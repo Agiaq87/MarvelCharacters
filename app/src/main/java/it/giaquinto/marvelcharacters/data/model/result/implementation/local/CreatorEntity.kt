@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import it.giaquinto.marvelcharacters.data.model.result.MarvelCreator
 
-@Entity(tableName = "creator")
+@Entity(tableName = "creators")
 data class CreatorEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
@@ -15,9 +15,4 @@ data class CreatorEntity(
     override val fullName: String,
     val modified: String,
     val resourceURI: String,
-) : MarvelCreator {
-    fun asEntity(): CreatorEntity =
-        CreatorEntity(
-            id, firstName, middleName, lastName, suffix, fullName, modified, resourceURI
-        )
-}
+) : MarvelCreator

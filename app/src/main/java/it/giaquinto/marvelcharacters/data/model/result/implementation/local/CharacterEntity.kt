@@ -12,9 +12,4 @@ data class CharacterEntity(
     override val description: String,
     val modified: String,
     override val resourceURI: String
-) : MarvelCharacter {
-    fun asEntity(): CharacterEntity =
-        CharacterEntity(
-            id, name, description, modified, resourceURI
-        )
-}
+) : MarvelCharacter

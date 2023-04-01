@@ -15,9 +15,4 @@ data class SerieEntity(
     override val endYear: Int,
     override val rating: String,
     override val modified: String,
-) : MarvelSerie {
-    fun asEntity(): SerieEntity =
-        SerieEntity(
-            id, title, description, resourceURI, startYear, endYear, rating, modified
-        )
-}
+) : MarvelSerie

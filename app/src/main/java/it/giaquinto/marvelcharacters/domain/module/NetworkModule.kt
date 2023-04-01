@@ -1,6 +1,5 @@
 package it.giaquinto.marvelcharacters.domain.module
 
-import android.util.Log
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -8,11 +7,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import it.giaquinto.marvelcharacters.BuildConfig
 import it.giaquinto.marvelcharacters.data.service.*
-import okhttp3.Interceptor
+import it.giaquinto.marvelcharacters.data.utils.toMD5
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.MessageDigest
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -22,42 +22,43 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient = with(OkHttpClient.Builder()) {
-        connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-        readTimeout(TIMEOUT, TimeUnit.SECONDS)
-        writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-        if (BuildConfig.DEBUG) {
-            addInterceptor(
-                HttpLoggingInterceptor { message ->
-                    Log.d(
-                        "MARVEL-HTTP-LOG",
-                        message
-                    )
-                }.apply {
-                    setLevel(HttpLoggingInterceptor.Level.HEADERS)
-                    setLevel(HttpLoggingInterceptor.Level.BODY)
-                }
-            )
-        }
+        connectTimeout(TIMEOUT, TimeUnit.MINUTES)
+        readTimeout(TIMEOUT, TimeUnit.MINUTES)
+        writeTimeout(TIMEOUT, TimeUnit.MINUTES)
 
-        addInterceptor(
-            Interceptor {
-                it.proceed(
-                    it.request()
+        addInterceptor { chain ->
+            val ts = System.currentTimeMillis()
+            with(chain) {
+                proceed(
+                    request()
                         .newBuilder()
                         .url(
-                            it.request()
+                            request()
                                 .url
                                 .newBuilder()
+                                .addQueryParameter("ts", ts.toString())
+                                .addQueryParameter("apikey", BuildConfig.PUBLIC_KEY)
                                 .addQueryParameter(
-                                    "apikey",
-                                    PUBLIC_KEY
+                                    "hash",
+                                    "$ts${BuildConfig.PRIVATE_KEY}${BuildConfig.PUBLIC_KEY}".toMD5(
+                                        MessageDigest.getInstance("MD5")
+                                    )
                                 )
                                 .build()
                         )
                         .build()
                 )
             }
-        )
+        }
+
+        if (BuildConfig.DEBUG) {
+            addInterceptor(
+                HttpLoggingInterceptor(
+                    HttpLoggingInterceptor.Logger.DEFAULT
+                )
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+        }
 
         build()
     }
@@ -69,7 +70,7 @@ class NetworkModule {
         client(httpClient)
         addConverterFactory(
             GsonConverterFactory.create(
-                GsonBuilder().setLenient().create()
+                GsonBuilder().create()
             )
         ) // TODO Verify if strictly mode it's possible to use
         build()
@@ -107,8 +108,8 @@ class NetworkModule {
 
 
     companion object {
-        private const val TIMEOUT = 20L
-        private const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
+        private const val TIMEOUT = 1L
+        private const val BASE_URL = "https://gateway.marvel.com/v1/public/"
         private const val PUBLIC_KEY = "323934a0c171cb0a0140ede93dd4e52d"
 
     }

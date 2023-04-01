@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import it.giaquinto.marvelcharacters.data.model.result.MarvelEvent
 
-@Entity(tableName = "entities")
+@Entity(tableName = "events")
 data class EventEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
@@ -14,9 +14,4 @@ data class EventEntity(
     override val modified: String,
     override val start: String,
     override val end: String,
-) : MarvelEvent {
-    fun asEntity(): EventEntity =
-        EventEntity(
-            id, title, description, resourceURI, modified, start, end
-        )
-}
+) : MarvelEvent

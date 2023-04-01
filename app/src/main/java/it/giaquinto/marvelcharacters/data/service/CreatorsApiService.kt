@@ -8,30 +8,30 @@ import retrofit2.http.Path
 
 interface CreatorsApiService {
 
-    @GET("/v1/public/creators")
+    @GET("creators")
     suspend fun searchCreators(): ApiResult<MarvelRemoteResponse<CreatorResult>>
 
-    @GET("/v1/public/creators/{creatorId}")
+    @GET("creators/{creatorId}")
     suspend fun searchCreatorsByCreatorID(
         @Path("creatorId") creatorId: String
     ): ApiResult<MarvelRemoteResponse<CreatorResult>>
 
-    @GET("/v1/public/comics/{comicId}/creators")
+    @GET("comics/{comicId}/creators")
     suspend fun searchCreatorsByComicID(
         @Path("comicId") comicId: String
     ): ApiResult<MarvelRemoteResponse<CreatorResult>>
 
-    @GET("/v1/public/events/{eventId}/creators")
+    @GET("events/{eventId}/creators")
     suspend fun searchCreatorsByEventID(
         @Path("eventId") eventId: String
     ): ApiResult<MarvelRemoteResponse<CreatorResult>>
 
-    @GET("/v1/public/series/{seriesId}/creators")
+    @GET("series/{seriesId}/creators")
     suspend fun searchCreatorsBySeriesID(
         @Path("seriesId") seriesId: String
     ): ApiResult<MarvelRemoteResponse<CreatorResult>>
 
-    @GET("/v1/public/stories/{storyId}/creators")
+    @GET("stories/{storyId}/creators")
     suspend fun searchCreatorsByStoryID(
         @Path("storyId") storyId: String
     ): ApiResult<MarvelRemoteResponse<CreatorResult>>

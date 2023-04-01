@@ -8,35 +8,35 @@ import retrofit2.http.Path
 
 interface ComicsApiService {
 
-    @GET("/v1/public/comics")
+    @GET("comics")
     suspend fun searchComics(): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/comics/{comicId}")
+    @GET("comics/{comicId}")
     suspend fun searchComicsByComicID(
         @Path("comicId") comicId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/characters/{characterId}/comics")
+    @GET("characters/{characterId}/comics")
     suspend fun searchComicsByCharacterID(
         @Path("characterId") characterId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/creators/{creatorId}/comics")
+    @GET("creators/{creatorId}/comics")
     suspend fun searchComicsByCreatorID(
         @Path("creatorId") creatorId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/events/{eventId}/comics")
+    @GET("events/{eventId}/comics")
     suspend fun searchComicsByEventID(
         @Path("eventId") eventId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/series/{seriesId}/comics")
+    @GET("series/{seriesId}/comics")
     suspend fun searchComicsBySeriesID(
         @Path("seriesId") seriesId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>
 
-    @GET("/v1/public/stories/{storyId}/comics")
+    @GET("stories/{storyId}/comics")
     suspend fun searchComicsByStoryID(
         @Path("storyId") storyId: String
     ): ApiResult<MarvelRemoteResponse<ComicResult>>

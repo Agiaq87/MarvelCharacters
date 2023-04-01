@@ -21,22 +21,4 @@ data class ComicEntity(
     override val issn: String,
     override val format: String,
     override val pageCount: Int
-) : MarvelComic {
-    fun asEntity(): ComicEntity =
-        ComicEntity(
-            id,
-            digitalId,
-            title,
-            issueNumber,
-            variantDescription,
-            description,
-            modified,
-            isbn,
-            upc,
-            diamondCode,
-            ean,
-            issn,
-            format,
-            pageCount
-        )
-}
+) : MarvelComic

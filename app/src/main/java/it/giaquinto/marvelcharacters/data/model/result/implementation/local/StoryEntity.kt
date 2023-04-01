@@ -13,9 +13,4 @@ data class StoryEntity(
     override val resourceURI: String,
     override val type: String,
     override val modified: String,
-) : MarvelStory {
-    fun asEntity(): StoryEntity =
-        StoryEntity(
-            id, title, description, resourceURI, type, modified
-        )
-}
+) : MarvelStory

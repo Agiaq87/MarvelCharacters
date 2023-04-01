@@ -8,35 +8,35 @@ import retrofit2.http.Path
 
 interface EventsApiService {
 
-    @GET("/v1/public/events")
+    @GET("events")
     suspend fun events(): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/events/{eventId}")
+    @GET("events/{eventId}")
     suspend fun searchEventByEventID(
         @Path("eventId") eventId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/characters/{characterId}/events")
+    @GET("characters/{characterId}/events")
     suspend fun searchEventsByCharacterID(
         @Path("characterId") characterId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/comics/{comicId}/events")
+    @GET("comics/{comicId}/events")
     suspend fun searchEventsByComicID(
         @Path("comicId") comicId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/creators/{creatorId}/events")
+    @GET("creators/{creatorId}/events")
     suspend fun searchEventsByCreatorID(
         @Path("creatorId") creatorId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/series/{seriesId}/events")
+    @GET("series/{seriesId}/events")
     suspend fun searchEventsBySeriesID(
         @Path("seriesId") seriesId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>
 
-    @GET("/v1/public/stories/{storyId}/events")
+    @GET("stories/{storyId}/events")
     suspend fun searchEventsByStoryID(
         @Path("storyId") storyId: String
     ): ApiResult<MarvelRemoteResponse<EventResult>>

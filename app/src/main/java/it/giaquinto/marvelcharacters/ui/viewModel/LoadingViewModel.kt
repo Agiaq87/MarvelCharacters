@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.repository.*
 import it.giaquinto.marvelcharacters.domain.manager.NetworkManager
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
@@ -50,7 +51,19 @@ class LoadingViewModel @Inject constructor(
                 ConnectivityState.KO -> uiState.value = UIState.ErrorState(ErrorType.NETWORK)
                 ConnectivityState.OK -> {
                     uiState.value = UIState.LoadingState
-                    characterRepository.all()
+                    characterRepository.all().collect { collection ->
+                        when (collection) {
+                            is ApiResult.Loading -> Log.e("Flow", "LOading")
+                            is ApiResult.Success -> {
+                                collection.data.forEach {
+                                    Log.e("TADA", it.toString())
+                                }
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
                 }
             }
         }
