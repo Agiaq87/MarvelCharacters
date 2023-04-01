@@ -6,6 +6,7 @@ import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
 import it.giaquinto.marvelcharacters.data.repository.CharacterRepository
 import it.giaquinto.marvelcharacters.data.service.CharactersApiService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,7 +15,7 @@ class CharactersRepositoryImplementation @Inject constructor(
     private val charactersApiService: CharactersApiService,
     private val characterDao: CharacterDao
 ) : CharacterRepository {
-    override fun all(): Flow<ApiResult<List<MarvelCharacter>>> {
+    override fun all(): Flow<ApiResult<List<MarvelCharacter>>> = flow {
         TODO("Not yet implemented")
     }
 

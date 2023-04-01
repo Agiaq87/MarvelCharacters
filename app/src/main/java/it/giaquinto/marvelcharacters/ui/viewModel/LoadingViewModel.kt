@@ -1,5 +1,7 @@
 package it.giaquinto.marvelcharacters.ui.viewModel
 
+import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import it.giaquinto.marvelcharacters.data.repository.*
@@ -7,13 +9,9 @@ import it.giaquinto.marvelcharacters.domain.manager.NetworkManager
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import it.giaquinto.marvelcharacters.domain.manager.data.network.ConnectivityState
 import it.giaquinto.marvelcharacters.ui.navigation.ScreenType
-import it.giaquinto.marvelcharacters.ui.state.ErrorState
 import it.giaquinto.marvelcharacters.ui.state.ErrorType
-import it.giaquinto.marvelcharacters.ui.state.LoadingState
 import it.giaquinto.marvelcharacters.ui.state.UIState
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,23 +26,33 @@ class LoadingViewModel @Inject constructor(
     private val networkManager: NetworkManager,
     private val coroutine: CoroutineScope,
     trackerManager: TrackerManager,
-) : BaseViewModel<Nothing>(trackerManager) {
+) : BaseViewModel<Nothing>(networkManager, trackerManager) {
 
-    private val _uiState = MutableStateFlow<UIState>(LoadingState)
-    val uiState: StateFlow<UIState> = _uiState
+    val uiState = mutableStateOf<UIState>(UIState.LoadingState)
 
     init {
-        viewModelScope.launch {
-            if (networkManager.currentState() == ConnectivityState.OK) {
-
-            } else {
-                _uiState.value = ErrorState(ErrorType.NETWORK)
-            }
-        }
+        collectNetworkChange()
     }
 
     override val screenType: ScreenType
         get() = ScreenType.LOADING
     override val dataType: Nothing?
         get() = null
+
+    private fun collectNetworkChange() = viewModelScope.launch {
+        networkManager.stateListener.collect { connectivityState ->
+            Log.e(
+                this@LoadingViewModel::class.java.name,
+                "Collect network state with value $connectivityState"
+            )
+            when (connectivityState) {
+                ConnectivityState.CHANGE -> uiState.value = UIState.LoadingState
+                ConnectivityState.KO -> uiState.value = UIState.ErrorState(ErrorType.NETWORK)
+                ConnectivityState.OK -> {
+                    uiState.value = UIState.LoadingState
+                    characterRepository.all()
+                }
+            }
+        }
+    }
 }

@@ -1,9 +1,10 @@
 package it.giaquinto.marvelcharacters.ui.state
 
-interface UIState
+sealed class UIState {
+    object LoadingState : UIState()
 
-object LoadingState : UIState
+    data class ErrorState(val data: ErrorType) : UIState()
 
-data class ErrorState(val data: ErrorType) : UIState
+    object SuccessState : UIState()
+}
 
-object SuccessState : UIState

@@ -1,7 +1,7 @@
 package it.giaquinto.marvelcharacters.domain.manager.data.network
 
-enum class ConnectivityState {
-    OK,         // Wifi or mobile connection active
-    CHANGING,   // Connection state in change
-    KO         // Not connected
+sealed class ConnectivityState {
+    object OK : ConnectivityState()         // Wifi or mobile connection active
+    object CHANGE : ConnectivityState() // Connection state in change
+    object KO : ConnectivityState()         // Not connected
 }

@@ -9,13 +9,30 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.viewModel
+import it.giaquinto.marvelcharacters.ui.constant.loading
 import it.giaquinto.marvelcharacters.ui.state.UIState
 import it.giaquinto.marvelcharacters.ui.theme.*
-import kotlinx.coroutines.flow.StateFlow
+import it.giaquinto.marvelcharacters.ui.view.composable.NetworkErrorAlertDialog
+import it.giaquinto.marvelcharacters.ui.viewModel.LoadingViewModel
+
+
+@Composable
+fun LoadingFragment(
+    loadingViewModel: LoadingViewModel = viewModel()
+) {
+    val state by remember {
+        loadingViewModel.uiState
+    }
+
+    LoadingScreen(state)
+}
+
 
 @Composable
 fun Pulse(
@@ -54,9 +71,7 @@ fun Pulse(
 
 
 @Composable
-fun LoadingScreen(
-    uiState: StateFlow<UIState>
-) {
+fun LoadingScreen(state: UIState) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -72,14 +87,22 @@ fun LoadingScreen(
                         )
                         .wrapContentSize()
                 ) {
-                    Pulse(
-                        tweenDuration = DefaultTweenDuration
-                    ) {
-                        Text(
-                            "LOADING",
-                            style = MaterialTheme.typography.h1,
-                            textAlign = TextAlign.Center
-                        )
+                    when (state) {
+                        is UIState.LoadingState -> {
+                            Pulse(
+                                tweenDuration = DefaultTweenDuration
+                            ) {
+                                Text(
+                                    loading,
+                                    style = MaterialTheme.typography.h1,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                        is UIState.ErrorState -> {
+                            NetworkErrorAlertDialog()
+                        }
+                        else -> {}
                     }
                 }
                 /*CircularProgressIndicator(

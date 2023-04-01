@@ -251,6 +251,11 @@ fun <T : MarvelResult> SimpleList(
     }
 }
 
+@Composable
+fun ListFragment() {
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun ListPreview() {
@@ -289,3 +294,4 @@ fun ListPreview() {
         }
     }
 }
+

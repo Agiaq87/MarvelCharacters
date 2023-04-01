@@ -12,6 +12,7 @@ import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import it.giaquinto.marvelcharacters.domain.manager.data.tracker.ScreenDataTrack
 import it.giaquinto.marvelcharacters.ui.theme.MarvelCharactersTheme
 import it.giaquinto.marvelcharacters.ui.view.composable.*
+import it.giaquinto.marvelcharacters.ui.view.screen.LoadingFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint

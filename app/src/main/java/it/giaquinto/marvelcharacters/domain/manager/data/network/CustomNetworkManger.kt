@@ -7,6 +7,9 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import dagger.hilt.android.qualifiers.ApplicationContext
 import it.giaquinto.marvelcharacters.domain.manager.NetworkManager
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +22,8 @@ class CustomNetworkManger @Inject constructor(
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
-    private var connectivityState: ConnectivityState = ConnectivityState.CHANGING
+    private var _connectivityState = MutableStateFlow<ConnectivityState>(ConnectivityState.CHANGE)
+    override val stateListener = _connectivityState.asStateFlow()
 
     init {
         connectivityManager.registerNetworkCallback(
@@ -32,36 +36,49 @@ class CustomNetworkManger @Inject constructor(
         )
     }
 
+
     override fun currentState(): ConnectivityState =
-        connectivityState
+        _connectivityState.value
 
 
     override fun onAvailable(network: Network) {
-        connectivityState = ConnectivityState.OK
+        _connectivityState.update { ConnectivityState.OK }
         super.onAvailable(network)
     }
 
     override fun onLosing(network: Network, maxMsToLive: Int) {
-        connectivityState = ConnectivityState.CHANGING
+        _connectivityState.update {
+            ConnectivityState.CHANGE
+        }
         super.onLosing(network, maxMsToLive)
     }
 
     override fun onLost(network: Network) {
-        connectivityState = ConnectivityState.KO
+        _connectivityState.update {
+            ConnectivityState.KO
+        }
         super.onLost(network)
     }
 
     override fun onUnavailable() {
-        connectivityState = ConnectivityState.KO
+        _connectivityState.update {
+            ConnectivityState.KO
+        }
         super.onUnavailable()
     }
 
     override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
         super.onCapabilitiesChanged(network, networkCapabilities)
-        connectivityState =
+        _connectivityState.update {
             if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
                 ConnectivityState.OK
             else
                 ConnectivityState.KO
+        }
+
+    }
+
+    companion object {
+        private const val DELAY = 500L
     }
 }

@@ -30,3 +30,5 @@ val CardRoundedCorner = RoundedCornerShape(
     5.dp,
     5.dp
 )
+
+val AlertDialogBorderWidth = 5.dp

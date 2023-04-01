@@ -12,3 +12,4 @@ val ImageSize = 90.dp
 
 val DefaultProgressSize = 20.dp
 val DefaultProgressStrokeWidth = 5.dp
+
