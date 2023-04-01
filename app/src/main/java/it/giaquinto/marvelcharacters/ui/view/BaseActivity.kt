@@ -24,10 +24,7 @@ class BaseActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         trackerManager.track(
-            ScreenDataTrack(
-                "Base Activity",
-                "BaseActivity"
-            )
+            ScreenDataTrack.forActivity()
         )
 
         setContent {
@@ -53,7 +50,7 @@ fun MainView() {
             }
         ) {
             DefaultBackground {
-                LoadingScreen()
+                LoadingFragment()
             }
         }
     }

@@ -1,4 +1,4 @@
-package it.giaquinto.marvelcharacters.ui.view
+package it.giaquinto.marvelcharacters.ui.view.screen
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
@@ -13,9 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import it.giaquinto.marvelcharacters.ui.state.UIState
 import it.giaquinto.marvelcharacters.ui.theme.*
-import it.giaquinto.marvelcharacters.ui.view.composable.DefaultBackground
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun Pulse(
@@ -54,7 +54,9 @@ fun Pulse(
 
 
 @Composable
-fun LoadingScreen() {
+fun LoadingScreen(
+    uiState: StateFlow<UIState>
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -87,16 +89,6 @@ fun LoadingScreen() {
                     strokeWidth = DefaultProgressStrokeWidth
                 )*/
             }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShowLoadingPreview() {
-    MarvelCharactersTheme {
-        DefaultBackground {
-            LoadingScreen()
         }
     }
 }

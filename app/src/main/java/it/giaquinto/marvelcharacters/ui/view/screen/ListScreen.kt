@@ -1,4 +1,4 @@
-package it.giaquinto.marvelcharacters.ui.view
+package it.giaquinto.marvelcharacters.ui.view.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

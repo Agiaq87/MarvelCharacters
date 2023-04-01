@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import it.giaquinto.marvelcharacters.ui.view.LoadingScreen
+import it.giaquinto.marvelcharacters.ui.view.LoadingFragment
 
 @Composable
 fun NavigationScreens() {
@@ -15,7 +15,7 @@ fun NavigationScreens() {
         startDestination = Route.LoadingScreen.route
     ) {
         composable(route = Route.getDefaultRoutes(ScreenType.LOADING)) {
-            LoadingScreen()
+            LoadingFragment()
         }
 
         /*composable(route = Route.getDefaultRoutes(ScreenType.LIST)) {
