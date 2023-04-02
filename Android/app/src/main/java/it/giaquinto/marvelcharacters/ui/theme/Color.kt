@@ -8,7 +8,7 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 val BackgroundDefaultRed = Color(0xFFED1D24)
-val BackgroundDefaultRedItem = Color(0x260E0202)
+val BackgroundDefaultRedItem = Color(0xFFE6CFCF)
 
 val BackgroundGradientRedHigh = Color(0xFF4D090B)
 val BackgroundGradientRedMiddle = Color(0xFF0E0202)
