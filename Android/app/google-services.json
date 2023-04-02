@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "85731790974",
+    "project_id": "marveldemo-89937",
+    "storage_bucket": "marveldemo-89937.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85731790974:android:735adbc147d0e2d4c7082f",
+        "android_client_info": {
+          "package_name": "it.giaquinto.marvelcharacters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85731790974-fdvgj114r1q72pn7ddbcaj39ocu899p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1WkdCpr_eawU1WvyRBpgcWjJYdL6Fx1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85731790974-fdvgj114r1q72pn7ddbcaj39ocu899p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
