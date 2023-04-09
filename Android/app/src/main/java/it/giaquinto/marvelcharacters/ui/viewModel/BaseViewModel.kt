@@ -49,23 +49,23 @@ abstract class BaseViewModel<T : MarvelResult?> constructor(
 
     suspend fun <EXTENDED_MARVEL_RESULT: MarvelResult, EXTENDED_MARVEL_REPOSITORY: BaseRepository<EXTENDED_MARVEL_RESULT>> collect(
         repository: EXTENDED_MARVEL_REPOSITORY,
-        onLoading: () -> Unit,
-        onError: (String) -> Unit,
-        onSuccess: (List<EXTENDED_MARVEL_RESULT>) -> Unit
+        onLoading: (() -> Unit)?,
+        onError: ((String) -> Unit)?,
+        onSuccess: ((List<EXTENDED_MARVEL_RESULT>) -> Unit)?
     ) = with(repository) {
         all().collect {
             when(it) {
                 is ApiResult.Loading -> {
                     logRepoOnTracker(EventDataTrack.FetchNetwork(repository, it))
-                    onLoading()
+                    onLoading?.invoke()
                 }
                 is ApiResult.Success -> {
                     logRepoOnTracker(EventDataTrack.FetchNetwork(repository, it))
-                    onSuccess(it.data)
+                    onSuccess?.invoke(it.data)
                 }
                 is ApiResult.Error -> {
                     logRepoOnTracker(EventDataTrack.FetchNetwork(repository, it))
-                    onError(it.message)
+                    onError?.invoke(it.message)
                 }
             }
         }

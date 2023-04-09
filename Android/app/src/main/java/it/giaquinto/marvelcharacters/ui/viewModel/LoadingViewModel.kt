@@ -4,20 +4,16 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import it.giaquinto.marvelcharacters.data.api.ApiResult
-import it.giaquinto.marvelcharacters.data.model.result.MarvelResult
 import it.giaquinto.marvelcharacters.data.repository.*
 import it.giaquinto.marvelcharacters.domain.manager.NetworkManager
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import it.giaquinto.marvelcharacters.domain.manager.data.network.ConnectivityState
-import it.giaquinto.marvelcharacters.domain.manager.data.tracker.EventDataTrack
 import it.giaquinto.marvelcharacters.ui.navigation.ScreenType
 import it.giaquinto.marvelcharacters.ui.state.ErrorType
 import it.giaquinto.marvelcharacters.ui.state.UIState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -59,8 +55,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO) {
                         collect(
                             characterRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
@@ -69,8 +65,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO) {
                         collect(
                             comicRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
@@ -79,8 +75,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO) {
                         collect(
                             creatorRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
@@ -89,8 +85,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO) {
                         collect(
                             eventRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
@@ -99,8 +95,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO){
                         collect(
                             serieRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
@@ -109,8 +105,8 @@ class LoadingViewModel @Inject constructor(
                     launch(Dispatchers.IO) {
                         collect(
                             storyRepository,
-                            {},
-                            {}
+                            onLoading = null,
+                            onError = null
                         ) {
 
                         }
