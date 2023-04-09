@@ -21,7 +21,7 @@ class NetworkManager {
   Future<void> init() async {
     try {
       connectivityResult = await _connectivity.checkConnectivity();
-    } on PlatformException catch(e) {
+    } on PlatformException {
       connectivityResult = ConnectivityResult.none;
     }
   }

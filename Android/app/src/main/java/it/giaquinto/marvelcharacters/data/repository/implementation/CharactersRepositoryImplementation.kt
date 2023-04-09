@@ -56,4 +56,5 @@ class CharactersRepositoryImplementation @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override fun getUniqueName(): String = "CharacterRepository"
 }

@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import com.google.firebase.analytics.FirebaseAnalytics
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,7 +15,7 @@ internal class CustomTrackerManager @Inject constructor(
     private val coroutineScopeLow: CoroutineScope
 ) : TrackerManager {
 
-    override fun track(screenDataTrack: ScreenDataTrack) = with(coroutineScopeLow) {
+    override fun trackScreen(screenDataTrack: ScreenDataTrack) = with(coroutineScopeLow) {
         launch {
             with(firebaseAnalytics) {
                 logEvent(
@@ -27,5 +28,15 @@ internal class CustomTrackerManager @Inject constructor(
         }
     }
 
+    override fun trackEvent(eventDataTrack: EventDataTrack): Job = with(coroutineScopeLow) {
+        launch {
+            with(firebaseAnalytics) {
+                logEvent(
+                    eventDataTrack.name,
+                    eventDataTrack.params
+                )
+            }
+        }
+    }
 
 }

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface CreatorsApiService {
 
     @GET("creators")
-    suspend fun searchCreators(): ApiResult<MarvelRemoteResponse<CreatorResult>>
+    suspend fun creators(): List<MarvelRemoteResponse<CreatorResult>>
 
     @GET("creators/{creatorId}")
     suspend fun searchCreatorsByCreatorID(

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface SeriesApiService {
 
     @GET("series")
-    suspend fun series(): ApiResult<MarvelRemoteResponse<SerieResult>>
+    suspend fun series(): List<MarvelRemoteResponse<SerieResult>>
 
     @GET("series/{seriesId}")
     suspend fun searchSeriesBySeriesID(

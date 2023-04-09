@@ -24,7 +24,7 @@ class BaseActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        trackerManager.track(
+        trackerManager.trackScreen(
             ScreenDataTrack.forActivity()
         )
 

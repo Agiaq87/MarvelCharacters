@@ -7,3 +7,4 @@ fun Log.print(msg: String) = if (BuildConfig.DEBUG) {
     Log.d("MARVEL-CHARACTERS", msg)
 } else {
 }
+
