@@ -1,12 +1,12 @@
 package it.giaquinto.marvelcharacters.data.repository.implementation
 
-import android.util.Log
 import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.db.CreatorDao
-import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
 import it.giaquinto.marvelcharacters.data.model.result.MarvelCreator
+import it.giaquinto.marvelcharacters.data.model.result.asEntity
 import it.giaquinto.marvelcharacters.data.repository.CreatorRepository
 import it.giaquinto.marvelcharacters.data.service.CreatorsApiService
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -18,17 +18,26 @@ class CreatorsRepositoryImplementation @Inject constructor(
     private val creatorsApiService: CreatorsApiService,
     private val creatorDao: CreatorDao
 ) : CreatorRepository {
-    override suspend fun all(): Flow<ApiResult<out List<MarvelCreator>>> = flow {
+    override suspend fun all() = flow {
         emit(ApiResult.Loading())
-        val response = creatorsApiService.creators()
 
-        response.forEach {
-            Log.e("Flow", it.toString())
+        creatorsApiService.creators().also { marvelRemoteResponse ->
+            marvelRemoteResponse.data.results.forEach {
+                coroutineScope {
+                    creatorDao.insert(it.asEntity())
+                }
+            }
+            emit(
+                ApiResult.Success(
+                    marvelRemoteResponse.data.results.map { it.asEntity() },
+                    marvelRemoteResponse.code,
+                    marvelRemoteResponse.etag
+                )
+            )
         }
 
-        emit(ApiResult.Success(response as List<MarvelCreator>))
     }.catch { e ->
-        emit(ApiResult.Error(e.message ?: "ERROR"))
+        emit(ApiResult.Error(e.message ?: "ERROR", 0))
     }
 
     override suspend fun byCharacterID(characterID: String): Flow<ApiResult<out List<MarvelCreator>>> {

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface EventsApiService {
 
     @GET("events")
-    suspend fun events(): List<MarvelRemoteResponse<EventResult>>
+    suspend fun events(): MarvelRemoteResponse<EventResult>
 
     @GET("events/{eventId}")
     suspend fun searchEventByEventID(

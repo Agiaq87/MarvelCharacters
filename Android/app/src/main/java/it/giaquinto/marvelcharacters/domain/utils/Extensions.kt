@@ -8,3 +8,5 @@ fun Log.print(msg: String) = if (BuildConfig.DEBUG) {
 } else {
 }
 
+typealias Attribution = String
+typealias ETag = String

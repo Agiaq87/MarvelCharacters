@@ -6,12 +6,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.marvelcharacters.domain.manager.TrackerManager
 import it.giaquinto.marvelcharacters.domain.manager.data.tracker.ScreenDataTrack
 import it.giaquinto.marvelcharacters.ui.theme.MarvelCharactersTheme
-import it.giaquinto.marvelcharacters.ui.view.composable.*
+import it.giaquinto.marvelcharacters.ui.view.screen.AppBar
+import it.giaquinto.marvelcharacters.ui.view.screen.AppFooter
+import it.giaquinto.marvelcharacters.ui.view.screen.DefaultBackground
 import it.giaquinto.marvelcharacters.ui.view.screen.LoadingFragment
 import javax.inject.Inject
 
@@ -58,11 +59,7 @@ fun MainView() {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MainView()
-}
+
 
 
 

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface ComicsApiService {
 
     @GET("comics")
-    suspend fun comics(): List<MarvelRemoteResponse<ComicResult>>
+    suspend fun comics(): MarvelRemoteResponse<ComicResult>
 
     @GET("comics/{comicId}")
     suspend fun searchComicsByComicID(

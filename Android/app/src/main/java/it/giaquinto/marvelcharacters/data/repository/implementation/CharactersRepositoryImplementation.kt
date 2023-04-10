@@ -1,11 +1,12 @@
 package it.giaquinto.marvelcharacters.data.repository.implementation
 
-import android.util.Log
 import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.db.CharacterDao
 import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
+import it.giaquinto.marvelcharacters.data.model.result.asEntity
 import it.giaquinto.marvelcharacters.data.repository.CharacterRepository
 import it.giaquinto.marvelcharacters.data.service.CharactersApiService
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -20,15 +21,25 @@ class CharactersRepositoryImplementation @Inject constructor(
 
     override suspend fun all() = flow {
         emit(ApiResult.Loading())
-        val response = charactersApiService.characters()
 
-        response.forEach {
-            Log.e("Flow", it.toString())
+        charactersApiService.characters().also { marvelRemoteResponse ->
+            coroutineScope {
+                marvelRemoteResponse.data.results.forEach {
+                    characterDao.insert(it.asEntity())
+                }
+            }
+            emit(
+                ApiResult.Success(
+                    marvelRemoteResponse.data.results.map { it.asEntity() },
+                    marvelRemoteResponse.code,
+                    marvelRemoteResponse.etag
+                )
+            )
         }
 
-        emit(ApiResult.Success<List<MarvelCharacter>>(response as List<MarvelCharacter>))
+
     }.catch { e ->
-        emit(ApiResult.Error(e.message ?: "ERROR"))
+        emit(ApiResult.Error(e.message ?: "ERROR", 0))
     }
 
 

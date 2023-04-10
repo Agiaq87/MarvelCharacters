@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
 import it.giaquinto.marvelcharacters.data.model.result.MarvelComic
@@ -23,7 +22,6 @@ import it.giaquinto.marvelcharacters.data.model.result.MarvelResult
 import it.giaquinto.marvelcharacters.ui.constant.*
 import it.giaquinto.marvelcharacters.ui.model.ListType
 import it.giaquinto.marvelcharacters.ui.theme.*
-import it.giaquinto.marvelcharacters.ui.view.composable.DefaultBackground
 
 
 @Composable
@@ -256,7 +254,6 @@ fun ListFragment() {
 
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ListPreview() {
     MarvelCharactersTheme {

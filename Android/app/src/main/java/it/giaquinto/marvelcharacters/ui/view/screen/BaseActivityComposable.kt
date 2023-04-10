@@ -1,4 +1,4 @@
-package it.giaquinto.marvelcharacters.ui.view.composable
+package it.giaquinto.marvelcharacters.ui.view.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

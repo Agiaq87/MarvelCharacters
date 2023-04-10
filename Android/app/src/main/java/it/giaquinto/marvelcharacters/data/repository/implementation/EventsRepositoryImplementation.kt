@@ -1,10 +1,9 @@
 package it.giaquinto.marvelcharacters.data.repository.implementation
 
-import android.util.Log
 import it.giaquinto.marvelcharacters.data.api.ApiResult
 import it.giaquinto.marvelcharacters.data.db.EventDao
-import it.giaquinto.marvelcharacters.data.model.result.MarvelCharacter
 import it.giaquinto.marvelcharacters.data.model.result.MarvelEvent
+import it.giaquinto.marvelcharacters.data.model.result.asEntity
 import it.giaquinto.marvelcharacters.data.repository.EventRepository
 import it.giaquinto.marvelcharacters.data.service.EventsApiService
 import kotlinx.coroutines.flow.Flow
@@ -18,17 +17,23 @@ class EventsRepositoryImplementation @Inject constructor(
     private val eventsApiService: EventsApiService,
     private val eventDao: EventDao
 ) : EventRepository {
-    override suspend fun all(): Flow<ApiResult<out List<MarvelEvent>>> = flow {
+    override suspend fun all() = flow {
         emit(ApiResult.Loading())
-        val response = eventsApiService.events()
 
-        response.forEach {
-            Log.e("Flow", it.toString())
+        eventsApiService.events().also { marvelRemoteResponse ->
+            marvelRemoteResponse.data.results.forEach {
+                eventDao.insert(it.asEntity())
+            }
+            emit(
+                ApiResult.Success(
+                    marvelRemoteResponse.data.results.map { it.asEntity() },
+                    marvelRemoteResponse.code,
+                    marvelRemoteResponse.etag
+                )
+            )
         }
-
-        emit(ApiResult.Success(response as List<MarvelEvent>))
     }.catch { e ->
-        emit(ApiResult.Error(e.message ?: "ERROR"))
+        emit(ApiResult.Error(e.message ?: "ERROR", 0))
     }
 
     override suspend fun byCharacterID(characterID: String): Flow<ApiResult<out List<MarvelEvent>>> {

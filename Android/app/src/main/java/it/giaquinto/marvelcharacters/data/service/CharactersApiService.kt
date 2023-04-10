@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface CharactersApiService {
     @GET("characters")
-    suspend fun characters(): List<MarvelRemoteResponse<CharacterResult>>
+    suspend fun characters(): MarvelRemoteResponse<CharacterResult>
 
     @GET("characters/{characterId}")
     suspend fun searchCharacterByCharacterID(
