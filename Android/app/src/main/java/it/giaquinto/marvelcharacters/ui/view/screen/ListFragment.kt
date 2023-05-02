@@ -250,8 +250,10 @@ fun <T : MarvelResult> SimpleList(
 }
 
 @Composable
-fun ListFragment() {
-
+fun <T : MarvelResult> ListFragment(
+    list: List<T>
+) {
+    //val dataList: List<T> by remember()
 }
 
 @Composable

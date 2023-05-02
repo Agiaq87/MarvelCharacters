@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
 import it.giaquinto.marvelcharacters.ui.constant.loading
 import it.giaquinto.marvelcharacters.ui.state.UIState
 import it.giaquinto.marvelcharacters.ui.theme.*
@@ -30,7 +29,6 @@ fun LoadingFragment(
     val state by remember {
         loadingViewModel.uiState
     }
-    val navController = rememberNavController()
     LoadingScreen(state)
 }
 
